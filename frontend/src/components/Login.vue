@@ -20,17 +20,15 @@ const login = async () => {
       password: password.value,
     });
 
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+
     success.value = res.data.message;
 
-    if(success.value) {
+    if (success.value) {
       // Redirect to home page after successful login
       window.location.href = "/home";
     }
-
-    console.log("User:", res.data.user);
-
-    // Save user if needed
-    localStorage.setItem("user", JSON.stringify(res.data.user));
   } catch (err) {
     error.value =
       err.response?.data?.message || "Login failed";

@@ -19,4 +19,18 @@ const router = createRouter({
   routes,
 });
 
+router.beforeEach((to) => {
+  const isLoggedIn = Boolean(localStorage.getItem("token"));
+
+  if (to.path !== "/" && !isLoggedIn) {
+    return "/";
+  }
+
+  if (to.path === "/" && isLoggedIn) {
+    return "/home";
+  }
+
+  return true;
+});
+
 export default router;
