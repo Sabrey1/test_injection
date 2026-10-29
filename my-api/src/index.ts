@@ -64,7 +64,7 @@ app.get("/users", requireAuth, async (c) => {
   return c.json(result);
 });
 
-app.post("/users", async (c) => {
+app.post("/users", requireAuth ,async (c) => {
   const db = getDb(c.env.DB);
 
   const { name, password } = await c.req.json();
